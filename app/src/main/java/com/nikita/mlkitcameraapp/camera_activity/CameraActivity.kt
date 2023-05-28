@@ -37,9 +37,11 @@ class CameraActivity: AppCompatActivity() {
         val imageAnalyser = ImageAnalysis.Builder()
             .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
             .build()
+
+        val landmarkView = findViewById<LandmarkView>(R.id.landmark_view)
         imageAnalyser.setAnalyzer(
             mainExecutor,
-            ImageAnalyser()
+            ImageAnalyser(landmarkView)
         )
 
         cameraProvider?.bindToLifecycle(this, cameraSelector, preview, imageAnalyser)
